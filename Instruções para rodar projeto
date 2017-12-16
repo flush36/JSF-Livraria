@@ -1,0 +1,12 @@
+1 - configurar o persistence.xml de acordo com o seu banco
+
+2 - rodar a classe populaBanco
+
+3 - criar um usuario para acessar a aplicação
+3.1 - criando usuario
+  3.2 - no seu banco de dados use os seguintes comandos:
+            use nomedoseubanco;
+            insert into usuario(email,senha) values('seuemail', 'suasenha');
+4 - configurar o seu servidor de aplicação e rodar a aplicação na seguinte url : http://localhost:8080/livraria/login.xhtml
+  
+      
