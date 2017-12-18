@@ -17,22 +17,21 @@ public class LoginBean {
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
+	
 	public String efetuaLogin() {
-		System.out.println("Fazendo login do usuário "
-				+ this.usuario.getEmail());
+		System.out.println("fazendo login do usuario " + this.usuario.getEmail());
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		boolean existe = new UsuarioDao().existe(this.usuario);
-		if (existe) {
-			context.getExternalContext().getSessionMap()
-					.put("usuarioLogado", this.usuario);
+		if(existe ) {
+			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 			return "livro?faces-redirect=true";
 		}
-			context.getExternalContext().getFlash().setKeepMessages(true);
-			context.addMessage(null, new FacesMessage("Usuario não encontrado"));
-			
-			return "login?faces-redirect=true";
+		
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		context.addMessage(null, new FacesMessage("UsuÃ¡rio nÃ£o encontrado"));
+		
+		return "login?faces-redirect=true";
 	}
 	
 	public String deslogar() {
