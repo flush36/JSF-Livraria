@@ -21,10 +21,11 @@
 			<h:form rendered="#{usuarioLogado != null}">
 			
 			    <p:menuButton value="Menu">
-			        <p:menuitem value="Livros" action="livro?faces-redirect=true"  icon="ui-icon-arrowrefresh-1-w"/>
-			        <p:menuitem value="Autores" action="autor?faces-redirect=true" icon="ui-icon-close"/>
+			        <p:menuitem value="Livros" action="livro?faces-redirect=true"  icon="ui-icon-pencil"/>
+			        <p:menuitem value="Autores" action="autor?faces-redirect=true" icon="ui-icon-pencil"/>
+			        <p:menuitem value="Vendas" action="vendas?faces-redirect=true" icon="ui-icon-image"/>
 			        <p:separator />
-			        <p:menuitem value="Logout"  action="#{loginBean.deslogar}" icon="ui-icon-extlink"/>
+			        <p:menuitem value="Logout"  action="#{loginBean.deslogar}" icon="ui-icon-signout"/>
 			    </p:menuButton>
 			</h:form>
 			
