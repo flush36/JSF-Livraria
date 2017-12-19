@@ -29,7 +29,7 @@ public class LoginBean {
 		}
 		
 		context.getExternalContext().getFlash().setKeepMessages(true);
-		context.addMessage(null, new FacesMessage("UsuÃ¡rio nÃ£o encontrado"));
+		context.addMessage(null, new FacesMessage("Usuario não encontrado"));
 		
 		return "login?faces-redirect=true";
 	}
