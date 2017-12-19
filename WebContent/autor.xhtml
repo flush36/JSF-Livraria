@@ -18,6 +18,7 @@
 		</ui:define>
 
 		<ui:define name="conteudo">
+			<p:messages id="messagesGlobal" autoUpdate="true"/>	
 			<h:form id="autor">
 				<p:fieldset legend="Dados do Autor">
 					<h:panelGrid columns="3">
@@ -56,10 +57,10 @@
 					</p:commandButton>
 					
 					<p:commandButton id="removeAutor" icon="fa fa-fw fa-remove" action="#{autorBean.remover(autor)}" 
-						update="@form"/>
+						update="@form" />
 					#{autor.nome} - #{autor.email}
 				</p:dataList>
-			</h:form>		
+			</h:form>
 		</ui:define>
 
 	</ui:composition>

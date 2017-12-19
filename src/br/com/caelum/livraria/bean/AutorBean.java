@@ -48,7 +48,13 @@ public class AutorBean {
 	
 	public void remover(Autor autor) {
 		System.out.println("Removendo autor " + autor.getNome());
-		new DAO<Autor>(Autor.class).remove(autor);
+		try {
+			new DAO<Autor>(Autor.class).remove(autor);
+		}catch (Exception e) {
+			System.out.println("ENTRO NO CATCH");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Autor não pode ser apagado, favor excluir os livros do autor primeiro."));
+		}
+		
 	}
 	
 	public List<Autor> getAutores() {
