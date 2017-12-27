@@ -61,15 +61,15 @@ public class AutorBean implements Serializable{
 		return "livro?faces-redirect=true";
 	}
 	
-	
 	public void remover(Autor autor) {
 		System.out.println("Removendo autor " + autor.getNome());
 		try {
+			
 			manager.getTransaction().begin();
 			this.dao.remove(autor);
 			manager.getTransaction().commit();
+			
 		}catch (Exception e) {
-			System.out.println("ENTRO NO CATCH");
 			context.addMessage(null, new FacesMessage("Autor não pode ser apagado, favor excluir os livros do autor primeiro."));
 		}
 	}
