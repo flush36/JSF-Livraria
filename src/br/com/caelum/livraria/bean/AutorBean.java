@@ -1,25 +1,39 @@
 package br.com.caelum.livraria.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
 
+import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.dao.DAO;
+import br.com.caelum.livraria.manager.Transaction;
 import br.com.caelum.livraria.modelo.Autor;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class AutorBean {
+public class AutorBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Autor autor = new Autor();
+
+	@Inject
+	private AutorDao dao;
 	
 	private Integer autorId;
 	
+	@Inject
+	private FacesContext context;
 	
-
+	@Inject
+	private EntityManager manager;
+	
 	public Integer getAutorId() {
 		return autorId;
 	}
@@ -29,16 +43,17 @@ public class AutorBean {
 	}
 	
 	public void carregarAutorPelaId() {
-		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
+		this.autor = this.dao.buscaPorId(autorId);
 	}
 
+	@Transaction
 	public String gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 
 		if(this.autor.getId() == null) {
-			new DAO<Autor>(Autor.class).adiciona(this.autor);
+			this.dao.adiciona(this.autor);
 		} else {
-			new DAO<Autor>(Autor.class).atualiza(this.autor);
+			this.dao.atualiza(this.autor);
 		}
 
 		this.autor = new Autor();
@@ -46,19 +61,21 @@ public class AutorBean {
 		return "livro?faces-redirect=true";
 	}
 	
+	
 	public void remover(Autor autor) {
 		System.out.println("Removendo autor " + autor.getNome());
 		try {
-			new DAO<Autor>(Autor.class).remove(autor);
+			manager.getTransaction().begin();
+			this.dao.remove(autor);
+			manager.getTransaction().commit();
 		}catch (Exception e) {
 			System.out.println("ENTRO NO CATCH");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Autor não pode ser apagado, favor excluir os livros do autor primeiro."));
+			context.addMessage(null, new FacesMessage("Autor não pode ser apagado, favor excluir os livros do autor primeiro."));
 		}
-		
 	}
 	
 	public List<Autor> getAutores() {
-		return new DAO<Autor>(Autor.class).listaTodos();
+		return this.dao.listaTodos();
 	}
 	
 	public Autor getAutor() {

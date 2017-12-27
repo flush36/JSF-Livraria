@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.modelo;
 
+
 public class VendaLivros {
 
 	private Livro livro;
@@ -22,6 +23,4 @@ public class VendaLivros {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-	
-	
 }

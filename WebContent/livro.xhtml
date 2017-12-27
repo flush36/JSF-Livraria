@@ -19,7 +19,7 @@
 		</ui:define>
 
 		<ui:define name="conteudo">
-			<h:form>
+			<h:form id="formLivro">
 
 				<p:messages id="messages" />
 
@@ -108,11 +108,11 @@
 					</p:column>
 					
 					<p:column headerText="Alterar">
-						<h:commandLink value="altera" action="#{livroBean.carregar(livro)}"/>
+						<p:commandButton update=":formLivro" process="@this" value="alterar" actionListener="#{livroBean.carregar(livro)}" icon="fa fa-fw fa-times"/>
 					</p:column>					
 					
 					<p:column headerText="Remover">
-						<h:commandLink value="remove" action="#{livroBean.remover(livro)}"/>
+						<p:commandButton update="@form" process="@this" value="remover" actionListener="#{livroBean.remover(livro)}" icon="fa fa-fw fa-times"/>
 					</p:column>	
 					
 				</p:dataTable>
